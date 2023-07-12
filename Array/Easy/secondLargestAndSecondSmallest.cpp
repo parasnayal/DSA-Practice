@@ -1,73 +1,77 @@
-// Find Second Smallest and Second Largest Element in an array(unique non-negative integers)
+// Find the second largest and second minimum element in an array (unique non-negative integers).
 // Input : 'N' = 5 , 'A' = [1,2,3,4,5];
 // Output :[4,2]
 
-// Brute force => My brute force approach is => first sort an array then find the second largest and second minimum .In this way time complexity is => O(nlogn)
+// Brute force => first sort an array then find the second largest and second minimum .In this way time complexity is => O(nlogn).
 
 #include <iostream>
-#include <algorithm>
 #include <vector>
+#include <climits>
+// #include <algorithm>
 using namespace std;
+
 void sortArray(vector<int> &arr);
-vector<int> findSecondLargestAndMinimum(vector<int> &arr);
+
+vector<int> getSecondOrderElements(vector<int> &arr);
+
 int main(void)
 {
-    vector<int> vec = {3,4,5,2};
+    vector<int> vec = {1, 2, 3, 4, 5, 6};
 
     // sortArray(vec);
-    vector<int> result = findSecondLargestAndMinimum(vec);
-    cout << "Second minimum element of the array =>  " << result.at(0) << endl;
-    cout << "Second largest element of the array => " << result.at(1) << endl;
+    vector<int> vectorOfElement = getSecondOrderElements(vec);
+    cout << "Second largest element => " << vectorOfElement.at(0) << endl;
+    cout << "Second minimum element => " << vectorOfElement.at(1) << endl;
     return 0;
 }
-void sortArray(vector<int> &arr)
-{
-    sort(arr.begin(), arr.end());
-}
-vector<int> findSecondLargestAndMinimum(vector<int> &arr)
+
+// void sortArray(vector<int> &arr)
+// {
+//     sort(arr.begin(), arr.end());
+// }
+
+vector<int> getSecondOrderElements(vector<int> &arr)
 {
 
-    // ***** Brute force approach ********
-    // int second_minimum = *(arr.begin() + 1);
-    // int second_largest = *(arr.end() - 2);
-    // return {second_minimum, second_largest};
+    /*int second_largest_element = *(arr.end() - 2);
+    int second_minimum_element = *(arr.begin() + 1);
+    return {second_largest_element, second_minimum_element};*/
 
-    // ****** Better Approach
+    /*
+        ******* Better approach takes O(N) and loop running 2 times
+    int largest_element = INT_MIN;
+    int minimum_element = INT_MAX;
     int n = arr.size();
-    int largest_index = 0;
-    int minimum_index = 0;
 
-    for (int i = 1; i < n; i++)
-    {
-        if (arr[largest_index] < arr[i])
-        {
-            largest_index = i;
-        }
-        if (arr[minimum_index] > arr[i])
-        {
-            minimum_index = i;
-        }
-    }
-
-    int second_largest_index = 0;
-    int second_minimum_index = 0;
-    cout << "Minimum index => " << minimum_index << endl;
-    cout << "Minimum element => " << arr[minimum_index] << endl;
     for (int i = 0; i < n; i++)
     {
-        if (arr[i] != arr[largest_index] && arr[second_largest_index] < arr[i])
+        if (largest_element < arr[i])
         {
-            second_largest_index = i;
+            largest_element = arr[i];
         }
-        if (i == 0 && arr[i] == arr[minimum_index])
+        if (minimum_element > arr[i])
         {
-            second_minimum_index = 1;
-        }
-        else if ((arr[minimum_index] != arr[i] && (arr[second_minimum_index] > arr[minimum_index]) && (arr[second_minimum_index] > arr[i])))
-        {
-            cout << i << endl;
-            second_minimum_index = i;
+            minimum_element = arr[i];
         }
     }
-    return {arr[second_minimum_index], arr[second_largest_index]};
+
+    int second_largest_element = INT_MIN;
+    int second_minimum_element = INT_MAX;
+
+    for (int i = 0; i < n; i++)
+    {
+        if ((arr[i] != largest_element) && (second_largest_element < arr[i]))
+        {
+            second_largest_element = arr[i];
+        }
+
+        if ((arr[i] != minimum_element) && (arr[i] < second_minimum_element))
+        {
+            second_minimum_element = arr[i];
+        }
+    }
+    cout << second_largest_element << endl;
+    cout << second_minimum_element << endl;
+
+    return {second_largest_element, second_minimum_element};*/
 }
