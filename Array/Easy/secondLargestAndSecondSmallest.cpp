@@ -16,7 +16,7 @@ vector<int> getSecondOrderElements(vector<int> &arr);
 
 int main(void)
 {
-    vector<int> vec = {1, 2, 3, 4, 5, 6};
+    vector<int> vec = {1,2,3,4,5,6,7,8,9,10};
 
     // sortArray(vec);
     vector<int> vectorOfElement = getSecondOrderElements(vec);
@@ -74,4 +74,37 @@ vector<int> getSecondOrderElements(vector<int> &arr)
     cout << second_minimum_element << endl;
 
     return {second_largest_element, second_minimum_element};*/
+
+    int largest_element = arr[0], minimum_element = arr[0];
+    cout << largest_element << endl;
+    cout << minimum_element << endl;
+    int second_largest_element, second_minimum_element;
+    cout << second_largest_element << endl;
+    cout << second_minimum_element << endl;
+    int n = arr.size();
+    for (int i = 1; i < n; i++)
+    {
+        if (arr[i] > largest_element)
+        {
+            second_largest_element = largest_element;
+            largest_element = arr[i];
+        }
+        else if ((arr[i] < largest_element) && (arr[i] > second_largest_element))
+        {
+            second_largest_element = arr[i];
+        }
+
+        if (arr[i] < minimum_element)
+        {
+            second_minimum_element = minimum_element;
+            minimum_element = arr[i];
+        }
+        else if (arr[i] > minimum_element && arr[i] < second_minimum_element)
+        {
+            second_minimum_element = arr[i];
+        }
+    }
+    cout << second_largest_element << endl;
+    cout << second_minimum_element << endl;
+    return {second_largest_element, second_minimum_element};
 }
