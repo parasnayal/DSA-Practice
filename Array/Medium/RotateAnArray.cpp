@@ -6,35 +6,42 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-void rotate(vector<int> &arr, int k);
+void rotate(vector<int> &nums, int k);
+void display(vector<int> nums);
 int main(void)
 {
     vector<int> nums = {1, 2, 3, 4, 5, 6, 7};
-    int k = 3;
+    int k = 4;
     rotate(nums, k);
-    cout << nums[0] << endl;
-    cout << nums[1] << endl;
-    cout << nums[2] << endl;
-    cout << nums[3] << endl;
-    cout << nums[4] << endl;
-    cout << nums[5] << endl;
-    cout << nums[6] << endl;
+    display(nums);
+    // cout << nums[0];
+    // cout << nums[1];
+    // cout << nums[2];
     return 0;
 }
-void rotate(vector<int> &arr, int k)
+void rotate(vector<int> &nums, int k)
 {
     int temp[k];
-    int n = arr.size();
+    int n = nums.size() - 1;
     for (int i = 0; i < k; i++)
     {
-        temp[i] = arr[n - k + i];
+        temp[i] = nums[n - i];
     }
-    for (int i = n - k; i >= 0; i--)
+
+    for (int i = n; i >= k; i--)
     {
-        arr[k + i - 1] = arr[i - 1];
+        nums[i] = nums[i - k];
     }
+
     for (int i = 0; i < k; i++)
     {
-        arr[i] = temp[i];
+        nums[i] = temp[k - i - 1];
+    }
+}
+void display(vector<int> nums)
+{
+    for (auto it : nums)
+    {
+        cout << it << "\t";
     }
 }
