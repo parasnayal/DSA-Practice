@@ -6,39 +6,47 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+
 void rotate(vector<int> &nums, int k);
-void display(vector<int> nums);
+void display(vector<int> &nums);
+
 int main(void)
 {
     vector<int> nums = {1, 2, 3, 4, 5, 6, 7};
-    int k = 4;
+    int k = 3;
     rotate(nums, k);
     display(nums);
-    // cout << nums[0];
-    // cout << nums[1];
-    // cout << nums[2];
     return 0;
 }
+
 void rotate(vector<int> &nums, int k)
 {
-    int temp[k];
-    int n = nums.size() - 1;
-    for (int i = 0; i < k; i++)
+    int n = nums.size();
+    k = k % n;
+
+    if (n == 1 || k == 0)
     {
-        temp[i] = nums[n - i];
+        return;
     }
 
-    for (int i = n; i >= k; i--)
-    {
-        nums[i] = nums[i - k];
-    }
+    vector<int> temp(k);
 
     for (int i = 0; i < k; i++)
     {
-        nums[i] = temp[k - i - 1];
+        temp[i] = nums[n -  k + i];
+    }
+
+    for (int i = n; i > k; i--)
+    {
+        nums[i - 1] = nums[i - 1 - k];
+    }
+
+    for (int i = 0; i < k; i++)
+    {
+        nums[i] = temp[i];
     }
 }
-void display(vector<int> nums)
+void display(vector<int> &nums)
 {
     for (auto it : nums)
     {
