@@ -14,16 +14,20 @@ int main(void)
 {
     vector<int> nums = {1, 2, 3, 4, 5, 6, 7};
     int k = 3;
+
     rotate(nums, k);
     display(nums);
+
     return 0;
 }
 
+// Brute force approach => using temp array
+// Time Complexity => O(n)
+// Space Complexity => O(K)
 void rotate(vector<int> &nums, int k)
 {
     int n = nums.size();
     k = k % n;
-
     if (n == 1 || k == 0)
     {
         return;
@@ -33,23 +37,25 @@ void rotate(vector<int> &nums, int k)
 
     for (int i = 0; i < k; i++)
     {
-        temp[i] = nums[n -  k + i];
+        temp[i] = nums[n - 1 - i];
     }
 
-    for (int i = n; i > k; i--)
+    for (int i = n - 1; i >= k; i--)
     {
-        nums[i - 1] = nums[i - 1 - k];
+        nums[i] = nums[i - k];
     }
 
     for (int i = 0; i < k; i++)
     {
-        nums[i] = temp[i];
+        nums[i] = temp[k - 1 - i];
     }
 }
+
 void display(vector<int> &nums)
 {
     for (auto it : nums)
     {
         cout << it << "\t";
     }
+    cout << endl;
 }
