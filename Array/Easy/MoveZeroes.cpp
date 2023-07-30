@@ -20,6 +20,36 @@ int main(void)
 // Time Complexity => O(N)
 // Space Complexity => O(size of array - number of zeroes) => O(N) in worst case
 
+// void moveZeroes(vector<int> &nums)
+// {
+//     int n = nums.size();
+//     if (n == 0 || n == 1)
+//     {
+//         return;
+//     }
+
+//     vector<int> temp;
+
+//     for (int i = 0; i < n; i++)
+//     {
+//         if (nums[i] != 0)
+//         {
+//             temp.push_back(nums[i]);
+//         }
+//     }
+
+//     for (int i = temp.size(); i < n; i++)
+//     {
+//         temp.push_back(0);
+//     }
+
+//     nums.assign(temp.begin(), temp.end());
+// }
+
+// Using two pointer approach
+// Time Complexity => O(N)
+// Space Complexity => O(1)
+
 void moveZeroes(vector<int> &nums)
 {
     int n = nums.size();
@@ -27,21 +57,22 @@ void moveZeroes(vector<int> &nums)
     {
         return;
     }
-
-    vector<int> temp;
-
+    int j = 0;
     for (int i = 0; i < n; i++)
     {
-        if (nums[i] != 0)
+        // if (nums[i])
+        // {
+        //     // int temp = nums[j];
+        //     // nums[j] = nums[i];
+        //     // nums[i] = temp;
+        //     swap(nums[j], nums[i]);
+        //     j++;
+        // }
+
+        if (nums[i])
         {
-            temp.push_back(nums[i]);
+            swap(nums[j], nums[i]);
+            j++;
         }
     }
-
-    for (int i = temp.size(); i < n; i++)
-    {
-        temp.push_back(0);
-    }
-
-    nums.assign(temp.begin(), temp.end());
 }
