@@ -36,10 +36,12 @@ int main(void)
 //     return temp;
 // }
 
-vector<int> unionOfSortedArrays(vector<int> nums1, vector<int> nums2)
+// Time complexity => O(n)
+
+vector<int> unionOfSortedArrays(vector<int> a, vector<int> b)
 {
-    int n = nums1.size();
-    int m = nums2.size();
+    int n = a.size();
+    int m = b.size();
     int i = 0;
     int j = 0;
 
@@ -47,59 +49,55 @@ vector<int> unionOfSortedArrays(vector<int> nums1, vector<int> nums2)
 
     while (i < n && j < m)
     {
-        cout << "Inside while loop" << endl;
-        if (nums1[i] == nums2[j])
+        if (a[i] == b[j] && (i == 0 || temp.back() != a[i]))
         {
-            cout << "1" << endl;
-            temp.push_back(nums1[i]);
+
+            temp.push_back(a[i]);
             i++;
             j++;
         }
-        else if (nums1[i] < nums2[j])
+        else
         {
-            cout << "2" << endl;
-            temp.push_back(nums1[i]);
-            i++;
-        }
-        else if (nums1[i] > nums2[j])
-        {
-            cout << "3" << endl;
-            temp.push_back(nums2[j]);
-            j++;
+            if (i != 0 && temp.back() == a[i])
+            {
+                i++;
+            }
+            else if (i != 0 && temp.back() == b[j])
+            {
+                j++;
+            }
+            else if (a[i] > b[j])
+            {
+                temp.push_back(b[j]);
+                j++;
+            }
+            else
+            {
+                temp.push_back(a[i]);
+                i++;
+            }
         }
     }
 
     while (i < n)
     {
-        if (temp.back() != nums1[i] && temp.back() < nums1[i])
+        if (temp.back() != a[i])
         {
-            cout << "4" << endl;
-            temp.push_back(nums1[i]);
-            i++;
+            temp.push_back(a[i]);
         }
-        else if (temp.back() == nums1[i])
-        {
-            i++;
-            break;
-        }
+
+        i++;
     }
+
     while (j < m)
     {
-        if (temp.back() != nums2[j] && temp.back() < nums2[j])
+        if (temp.back() != b[j])
         {
-            cout << "5" << endl;
-            temp.push_back(nums2[j]);
-            j++;
+            temp.push_back(b[j]);
         }
-        else if (temp.back() == nums2[j])
-        {
-            j++;
-            break;
-        }
+
+        j++;
     }
-    cout << temp[0] << endl;
-    cout << temp[1] << endl;
-    cout << temp[2] << endl;
-    cout << temp[3] << endl;
+
     return temp;
 }
