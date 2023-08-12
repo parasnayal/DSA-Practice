@@ -1,18 +1,21 @@
 // Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.
 
-// Input : nums = [ 9, 6, 4, 2, 3, 5, 7, 0, 1 ]
-// Output : 8
+// Input: nums = [9,6,4,2,3,5,7,0,1]
+// Output: 8
 
 #include <iostream>
 #include <vector>
 using namespace std;
+
 int missingNumber(vector<int> &nums);
 int main(void)
 {
-    vector<int> nums{3, 0, 1};
-    cout << missingNumber(nums) << endl;
+    vector<int> nums{9, 6, 4, 2, 3, 5, 7, 0, 1};
+    missingNumber(nums);
     return 0;
 }
+
+// Brute force aprroach => O(n^2)
 
 int missingNumber(vector<int> &nums)
 {
@@ -25,16 +28,14 @@ int missingNumber(vector<int> &nums)
         {
             if (i == nums[j])
             {
-                cout << "inside"<<endl;
-                flag == 1;
-                // break;
+                flag = 1;
+                break;
             }
         }
-
         if (flag == 0)
         {
-            cout << i << endl;
             missingNumber = i;
+            break;
         }
     }
     return missingNumber;
