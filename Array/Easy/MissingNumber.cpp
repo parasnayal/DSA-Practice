@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <vector>
+#include <numeric>
 using namespace std;
 
 int missingNumber(vector<int> &nums);
@@ -18,26 +19,38 @@ int main(void)
 // Brute force aprroach
 // Time complexity => O(n ^2)
 
+// int missingNumber(vector<int> &nums)
+// {
+//     int n = nums.size();
+//     int missingNumber;
+//     for (int i = 0; i <= n; i++)
+//     {
+//         int flag = 0;
+//         for (int j = 0; j < n; j++)
+//         {
+//             if (i == nums[j])
+//             {
+//                 flag = 1;
+//                 break;
+//             }
+//         }
+//         if (flag == 0)
+//         {
+//             missingNumber = i;
+//             break;
+//         }
+//     }
+//     return missingNumber;
+// }
+
+// Optimal Approach
+// Time Complexity => O(n)
+
 int missingNumber(vector<int> &nums)
 {
     int n = nums.size();
-    int missingNumber;
-    for (int i = 0; i <= n; i++)
-    {
-        int flag = 0;
-        for (int j = 0; j < n; j++)
-        {
-            if (i == nums[j])
-            {
-                flag = 1;
-                break;
-            }
-        }
-        if (flag == 0)
-        {
-            missingNumber = i;
-            break;
-        }
-    }
+    int sum_of_n_element = n * (n + 1) / 2;
+    int sum_of_array_element = accumulate(nums.begin(), nums.end(), 0);
+    int missingNumber = sum_of_n_element - sum_of_array_element;
     return missingNumber;
 }
