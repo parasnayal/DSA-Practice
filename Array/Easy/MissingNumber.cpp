@@ -15,7 +15,8 @@ int main(void)
     return 0;
 }
 
-// Brute force aprroach => O(n^2)
+// Brute force aprroach
+// Time complexity => O(n ^2)
 
 int missingNumber(vector<int> &nums)
 {
