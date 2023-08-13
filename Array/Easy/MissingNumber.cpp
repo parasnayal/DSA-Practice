@@ -46,11 +46,30 @@ int main(void)
 // Optimal Approach
 // Time Complexity => O(n)
 
+// int missingNumber(vector<int> &nums)
+// {
+//     int n = nums.size();
+//     int sum_of_n_element = n * (n + 1) / 2;
+//     int sum_of_array_element = accumulate(nums.begin(), nums.end(), 0);
+//     int missingNumber = sum_of_n_element - sum_of_array_element;
+//     return missingNumber;
+// }
+
+// Optimal Approach => using xor operator
+// Time Complexity => O(n)
+
 int missingNumber(vector<int> &nums)
 {
     int n = nums.size();
-    int sum_of_n_element = n * (n + 1) / 2;
-    int sum_of_array_element = accumulate(nums.begin(), nums.end(), 0);
-    int missingNumber = sum_of_n_element - sum_of_array_element;
+    int xor1 = 0;
+    int xor2 = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        xor1 ^= (i + 1);
+        xor2 ^= nums[i];
+    }
+
+    int missingNumber = xor1 ^ xor2;
     return missingNumber;
 }
