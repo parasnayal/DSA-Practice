@@ -19,24 +19,37 @@ int main(void)
 // Brute force approach
 // Time Complexity => O(n^2)
 
+// int singleNumber(vector<int> &nums)
+// {
+//     int n = nums.size();
+//     int uniqueNumber;
+//     for (int i = 0; i < n; i++)
+//     {
+//         int flag = 0;
+//         for (int j = 0; j < n; j++)
+//         {
+//             if (nums[i] == nums[j])
+//             {
+//                 flag++;
+//             }
+//         }
+//         if (flag == 1)
+//         {
+//             uniqueNumber = nums[i];
+//         }
+//     }
+//     return uniqueNumber;
+// }
+
+// Optimal approach
+// Time complexity => o(n)
 int singleNumber(vector<int> &nums)
 {
     int n = nums.size();
-    int uniqueNumber;
+    int xor1 = 0;
     for (int i = 0; i < n; i++)
     {
-        int flag = 0;
-        for (int j = 0; j < n; j++)
-        {
-            if (nums[i] == nums[j])
-            {
-                flag++;
-            }
-        }
-        if (flag == 1)
-        {
-            uniqueNumber = nums[i];
-        }
+        xor1 ^= nums[i];
     }
-    return uniqueNumber;
+    return xor1;
 }
