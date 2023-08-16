@@ -18,21 +18,50 @@ int main(void)
 
 // Brute force approach
 // Time Complexity => O(n^2)
+// int longestSubarrayWithSumK(vector<int> &nums, long long k)
+// {
+//     int n = nums.size();
+//     int length = 0;
+//     for (int i = 0; i < n; i++)
+//     {
+//         long long sum = 0;
+//         for (int j = i; j < n; j++)
+//         {
+//             sum += nums[j];
+//             if (sum == k)
+//             {
+//                 length = max(length, j - i + 1);
+//             }
+//         }
+//     }
+//     return length;
+// }
+
+// Optimal approach
+// Time Complexity => O(2n) => O(n)
+
 int longestSubarrayWithSumK(vector<int> &nums, long long k)
 {
     int n = nums.size();
     int length = 0;
-    for (int i = 0; i < n; i++)
+    int left = 0;
+    int right = 0;
+    long long sum = 0;
+
+    while (right < n)
     {
-        long long sum = 0;
-        for (int j = i; j < n; j++)
+        sum += nums[right];
+        while (left <= right && sum > k)
         {
-            sum += nums[j];
-            if (sum == k)
-            {
-                length = max(length, j - i + 1);
-            }
+            sum -= nums[left];
+            left++;
         }
+
+        if (sum == k)
+        {
+            length = max(length, right - left + 1);
+        }
+        right++;
     }
     return length;
 }
